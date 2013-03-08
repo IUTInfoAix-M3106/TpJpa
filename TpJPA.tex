@@ -341,7 +341,6 @@ du département. Pour le configurer correctement avant chaque séance lancez la 
 \begin{code_shell}
 mysql --user=root --password=mysql --execute="create database gestionPedaBD"
 mysql --user=root --password=mysql --execute="grant all privileges on gestionPedaBD.* to monUser@localhost identified by 'monPassword'"
-scp monlogin@allegro.iut.univ-aix.fr:/users/prof/nedjar/public/gestion_peda_mysql.sql .
 mysql --user=monUser --password=monPassword gestionPedaBD --execute="source gestion_peda_mysql.sql"
 \end{code_shell}
 
