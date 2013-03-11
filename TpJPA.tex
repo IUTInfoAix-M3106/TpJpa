@@ -25,59 +25,48 @@
 \usepackage{listings}
 \usepackage{textcomp}
  
-\definecolor{gray}{gray}{0.5} 
-\lstnewenvironment{code_xml}[1][]{ 
-    \lstset
-      { 
-        language=XML,
-        inputencoding=utf8,
-        basicstyle=\ttfamily\footnotesize, 
-        showspaces=false,
-        showstringspaces=false,
-        showtabs=false,
-        frame=single,
-        morecomment=[s]{<!--}{-->},
-        commentstyle=\itshape\color{gray},
-        stringstyle=\color{blue},
-        keywordstyle=\color{red},
-        markfirstintag=true,
-        upquote=true
-      } 
-}{}
+\definecolor{gray}{gray}{0.5}
 
-\lstnewenvironment{code_shell}[1][]{ 
-    \lstset
-      { 
-        language=sh,
-        inputencoding=utf8,
-        basicstyle=\ttfamily\footnotesize, 
-        showspaces=false,
-        showstringspaces=false,
-        showtabs=false,
-        frame=single,
-        commentstyle=\itshape\color{gray},
-        stringstyle=\color{blue},
-        keywordstyle=\color{red},
-        upquote=true
-      } 
-}{}
+\lstdefinestyle{customxml}{
+    language=XML,
+    inputencoding=utf8,
+    basicstyle=\ttfamily\footnotesize,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    morecomment=[s]{<!--}{-->},
+    commentstyle=\itshape\color{gray},
+    stringstyle=\color{blue},
+    keywordstyle=\color{red},
+    markfirstintag=true,
+    upquote=true
+}
 
-\lstnewenvironment{code_java}[1][]{ 
-    \lstset
-      { 
-        language=java,
-        inputencoding=utf8,
-        basicstyle=\ttfamily\normalsize, 
-        showspaces=false,
-        showstringspaces=false,
-        showtabs=false,
-        frame=single,
-        commentstyle=\itshape\color{gray},
-        stringstyle=\color{blue},
-        keywordstyle=\color{red},
-        upquote=true
-      } 
-}{}
+\lstdefinestyle{customsh}{
+    language=sh,
+    inputencoding=utf8,
+    basicstyle=\ttfamily\footnotesize,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    commentstyle=\itshape\color{gray},
+    stringstyle=\color{blue},
+    keywordstyle=\color{red},
+    upquote=true
+}
+
+\lstdefinestyle{customjava}{
+    language=java,
+    inputencoding=utf8,
+    basicstyle=\ttfamily\footnotesize,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    commentstyle=\itshape\color{gray},
+    stringstyle=\color{blue},
+    keywordstyle=\color{red},
+    upquote=true
+} 
 
 \usepackage{todonotes}
 \usepackage{tikz-er2}
@@ -129,16 +118,11 @@ marginparwidth=27mm}
 \begin{document}
 \lstset{
          breaklines=true,                                     % line wrapping on
-         %frame=ltrb,
+         frame=ltrb,
          framesep=5pt,
          %samepage=true,
          tabsize=4,
-         basicstyle=\normalsize,
          frameround=ftft,
-         keywordstyle=\ttfamily\color{SeaGreen4},
-         identifierstyle=\ttfamily\bfseries\color{RoyalBlue4},
-         commentstyle=\color{RoyalBlue3},
-         stringstyle=\ttfamily,
          showstringspaces=false
 }
 \pgfdeclarelayer{background}
@@ -323,35 +307,21 @@ Dans le dialogue sélectionnez le dossier TpJPA, cliquez sur le POM du projet et
 Comme toujours avec un projet JPA, vous devez commencer par configurer les paramètres d'accès à la base de données.
 Nous allons comme dans le TP précédent utiliser préférentiellement le serveur MySQL installé localement sur les machines 
 du département. Pour le configurer correctement avant chaque séance lancez la séquence de commandes suivante :
-\begin{code_shell}
+\begin{lstlisting}[language=sh,style=customsh]
+wget https://raw.github.com/nedseb/TpJpa/master/gestion_peda_mysql.sql -O ~/net-home/gestion_peda_mysql.sql
 mysql --user=root --password=mysql --execute="create database gestionPedaBD"
 mysql --user=root --password=mysql --execute="grant all privileges on gestionPedaBD.* to monUser@localhost identified by 'monPassword'"
-mysql --user=monUser --password=monPassword gestionPedaBD --execute="source gestion_peda_mysql.sql"
-\end{code_shell}
+mysql --user=monUser --password=monPassword gestionPedaBD --execute="source ~/net-home/gestion_peda_mysql.sql"
+\end{lstlisting}
+Pour vous simplifier la vie, pendant la durée de ce TP vous pouvez tout aussi bien rajouter ces 4 lignes dans 
+votre \texttt{\~/net-home/.bash\_profile} pour qu'il soit lancé dès que vous ouvrez un terminal.
 
-Le fichier \texttt{src/main/resources/META-INF/persistence.xml} devra ressembler à ceci :
-\begin{code_xml}
-<?xml version="1.0" encoding="UTF-8" ?>
 
-<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd" 
-  version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
-  <persistence-unit name="gestionPedaPU" transaction-type="RESOURCE_LOCAL">
-    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-	<class>fr.univaix.iut.progbd.beans.Etudiant</class>
-	<class>fr.univaix.iut.progbd.beans.Module</class>
-	<class>fr.univaix.iut.progbd.beans.Prof</class>
-    <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/gestionPedaBD"/>
-      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.user"  value="monUser"/>
-      <property name="javax.persistence.jdbc.password"  value="monPassword"/>
-      <property name="eclipselink.logging.level" value="ALL"/>
-<!--  <property name="eclipselink.ddl-generation"  value="create-tables"/> -->
-    </properties>
-  </persistence-unit>
-</persistence>
-\end{code_xml}
+Le fichier \texttt{src/main/resources/META-INF/persistence.xml}\footnote{Vous pouvez trouver ce fichier 
+à l'adresse suivante : \url{https://raw.github.com/nedseb/TpJpa/master/persistence.xml}} devra ressembler à ceci :
+
+\lstinputlisting[language=XML,style=customxml]{persistence.xml}
+
 Remarquez que contrairement au tutoriel, nous ne demandons pas à JPA de nous créer les tables puisqu'elles existent déjà.
 L'une des principales difficultés de ce TP sera de configurer le mapping des entités pour qu'il corresponde aux relations 
 présentes dans la BD. Comme vous allez le voir, la BD ne satisfaisant pas à la convention par défaut de JPA,
@@ -453,7 +423,7 @@ donnée membre matérialisant l'association devra être une collection. Par exem
 rendre l'association \textit{"à pour département"} navigable dans le sens \texttt{Departement} vers \texttt{Employe}, 
 nous devons rajouter dans la classe \texttt{Departement} une donnée membre et les accesseurs suivants :
 
-\begin{code_java}
+\begin{lstlisting}[language=Java,style=customjava]
 private Collection<Employe> employes;
 public Collection<Employe> getEmployes() {
 	return employes;
@@ -464,16 +434,16 @@ public boolean add(Employe e) {
 public boolean remove(Object o) {
 		return employes.remove(o);
 }
-\end{code_java}
+\end{lstlisting}
 
 Pour paramétrer cette association, il faut lui rajouter l'annotation \texttt{@OneToMany} à laquelle on doit 
 préciser le type de l'entité lié et le nom de la donnée membre matérialisant l'association dans l'autre sens. Pour notre
 exemple, la déclaration de \texttt{employes} deviendrait :
 
-\begin{code_java}
+\begin{lstlisting}[language=Java,style=customjava]
 @OneToMany(targetEntity=Employe.class, mappedBy="departement", fetch=FetchType.EAGER)
 private Collection<Employe> employes;
-\end{code_java} 
+\end{lstlisting} 
 
 Notons qu'il y a deux points importants à se souvenir quand on définit une association \texttt{one-to-many} 
 bidirectionnelle : 
