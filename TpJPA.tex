@@ -125,24 +125,6 @@ marginparwidth=27mm}
 
 \usepackage{rotating}
 
-\newenvironment{agrandirmarges}[2]{%
-\begin{list}{}{%
-\setlength{\topsep}{0pt}%
-\setlength{\listparindent}{\parindent}%
-\setlength{\itemindent}{\parindent}%
-\setlength{\parsep}{0pt plus 1pt}%
-\checkoddpage%
-\ifoddpage
-\setlength{\leftmargin}{-#1}\setlength{\rightmargin}{-#2}
-\else
-\setlength{\leftmargin}{-#2}\setlength{\rightmargin}{-#1}
-\fi}\item }%
-{\end{list}}
-
-\newcounter{compteurQuestion}
-\setcounter{compteurQuestion}{0}
-\newcommand{\Question}{\paragraph*{Question~\thecompteurQuestion~:}\addtocounter{compteurQuestion}{1}}
-
 \date{}
 \begin{document}
 \lstset{
@@ -178,6 +160,10 @@ marginparwidth=27mm}
 \newlength{\colonneCinq}
 
 
+\newcounter{compteurQuestion}
+\setcounter{compteurQuestion}{0}
+\newcommand{\Question}{\paragraph*{Question~\thecompteurQuestion~:}\addtocounter{compteurQuestion}{1}}
+
 {\centering
     \mbox{
       \makebox[15cm][l]{
@@ -200,8 +186,7 @@ longue, fastidieuse et rébarbative. L'objectif de ce TP est d'utiliser JPA pour
 améliorer la fiabilité et la souplesse de notre couche de persistance. 
 
 Pour illustrer ce propos, nous utiliserons la base de données «~Gestion Pédagogique\footnote{Script de régénération disponible 
-à l'adresse suivante : \url{http://allegro.iut.univ-aix.fr/~nedjar/gestion_peda_oracle.sql} ou 
-\url{http://allegro.iut.univ-aix.fr/~nedjar/gestion_peda_mysql.sql}}~» que vous avez utilisée lors de vos TP de \textsc{Pl/Sql} 
+à l'adresse suivante : \url{https://raw.github.com/nedseb/TpJpa/master/gestion_peda_mysql.sql}}~» que vous avez utilisée lors de vos TP de \textsc{Pl/Sql} 
 en début d'année. Le modèle conceptuel des données est rappelé par la figure~\ref{mcd_gestion_peda}. La figure~\ref{uml_gestion_peda} 
 est une traduction du schéma Entité/Association en un  diagramme de classe UML. Dans ce TP nous avons modifié la 
 navigabilité de l'association "Est spécialiste" pour la rendre bi-directionnelle.
@@ -443,7 +428,7 @@ l'attribut clef étrangère (aussi appelé attribut de jointure) avec l'annotati
 attribut \texttt{name} comme \texttt{@Column}. Elle doit être placée juste devant la donnée membre matérialisant l'association. 
 
 \Question Annoter les entités pour que les associations \textit{"Est père de"}, \textit{A pour responsable} et 
-\textit{"Est spécialiste"} (pour l'instant on considère cette dernière comme unidirectionnelle).
+\textit{"Est spécialiste"} (pour l'instant on considère cette dernière comme unidirectionnelle) soient correctement mises en correspondance avec la base de données (N'oubliez pas que la BD ne respecte pas la convention JPA et qu'il faut donc configurer le mapping).
 \Question  Copier la classe \texttt{App} dans la nouvelle classe \texttt{afficheResponsable}. Modifier le code de cette classe 
 pour qu'elle récupère la matière BD et affiche l'enseignant qui en est responsable sur la sortie standard. Soyez vigilent
 que vos méthodes \texttt{toString()} n'essaient pas d'afficher tout le graphe des objets.
