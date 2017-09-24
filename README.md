@@ -131,18 +131,18 @@ par défaut porte le même nom que l’attribut), préciser son type, sa taille 
 
 -   L’annotation `@javax.persistence.ManyToMany` indique à JPA que la donnée membre est une association N:M.
 
-#### Question  :
+#### Question 1 :
 
 Annoter les classes `Etudiant`, `Prof` et `Module` pour qu’elles soient correctement mises en correspondance avec leur 
 relation respective. Dans cette question **les associations seront ignorées** pour le moment. Pour pouvoir tester votre 
 code, il faut rajouter l’annotation `@Transient` devant la déclaration de la donnée membre matérialisant l’association.
 
-#### Question  :
+#### Question 2 :
 
 Copier la classe `TestJPA` dans la nouvelle classe `AfficheEntite`. Modifier le code de cette classe pour qu’elle récupère 
 l’étudiant dont le `NUM_ET` est 1106 et l’affiche sur la sortie standard.
 
-#### Question  :
+#### Question 3 :
 
 Copier la classe `TestJPA` dans la nouvelle classe `AjouteEntite`. Modifier le code de cette classe pour qu’elle crée 
 un nouveau module, l’affiche, attend 1 minute et le supprime de la base de données. Vérifier en parallèle dans la 
@@ -186,18 +186,18 @@ s’appelle `ID_DEPARTEMENT`. Dans le cas où la clef n’a pas le nom conventio
 clef étrangère (aussi appelé attribut de jointure) avec l’annotation `@JoinColumn`. Celle-ci possède un attribut `name` 
 comme `@Column`. Elle doit être placée juste devant la donnée membre matérialisant l’association.
 
-#### Question  :
+#### Question 4 :
 
 Annoter les entités pour que les associations *“Est père de”*, *A pour responsable* et *“Est spécialiste”* (pour 
 l’instant on considère cette dernière comme unidirectionnelle) soient correctement mises en correspondance avec la base 
 de données (N’oubliez pas que la BD ne respecte pas la convention JPA et qu’il faut donc configurer le mapping).
 
-#### Question  :
+#### Question 5 :
 Copier la classe `TestJPA` dans la nouvelle classe `AfficheResponsable`. Modifier le code de cette classe pour qu’elle 
 récupère la matière BD et affiche l’enseignant qui en est responsable sur la sortie standard. Soyez vigilent que vos 
 méthodes `toString()` n’essaient pas d’afficher tout le graphe des objets.
 
-#### Question  :
+#### Question 6 :
 
 Copier la classe `TestJPA` dans la nouvelle classe `AfficheHierarchieModules`. Modifier le code de cette classe pour 
 qu’elle récupère la matière BD et affiche récursivement la hiérarchie des modules de cette matière. Observer la console 
@@ -251,13 +251,13 @@ Si l’on oublie de spécifier l’attribut `mappedBy` dans l’annotation `@One
 `one-to-many` comme unidirectionnelle et s’attendra à trouver une table de jointure dont le nom est constitué de la 
 concaténation des noms des entités liées.
 
-#### Question  :
+#### Question 7 :
 
 Modifier et annoter l’entité `Module` pour que l’association *“Est spécialiste”* soit bidirectionnelle.
 
-#### Question  :
+#### Question 8 :
 
-Copier la classe `App` dans la nouvelle classe `afficheSpécialistes`. Modifier le code de cette classe pour qu’elle 
+Copier la classe `TestJPA` dans la nouvelle classe `afficheSpécialistes`. Modifier le code de cette classe pour qu’elle 
 récupère la matière BD et affiche tous les spécialistes de cette matière.
 
 Le dernier type d’association qu’il nous reste à étudier sont les associations many-to-many. Pour ces associations en 
@@ -278,12 +278,12 @@ Cet élément prend pour valeur une annotation `@JoinColumn` pour donner tous le
 -   `inverseJoinColumns` qui spécifie le nom de l’attribut de la table de jointure qui est une clef étrangère vers 
 l’entité située coté inverse. De même que `joinColumns`, cet élément se paramètre avec une annotation `@JoinColumn`.
 
-#### Question  :
+#### Question 9 :
 
 Modifier et annoter les entités `Module` et `Etudiant` pour implémenter l’association bidirectionnelle *“Notation”* sans 
 les attributs portés.
 
-#### Question  :
+#### Question 10 :
 
 Copier la classe `TestJPA` dans la nouvelle classe `afficheNotation`. Modifier le code de cette classe pour qu’elle récupère 
 la matière BD et affiche tous les étudiants ayant été notés pour cette matière.
@@ -335,20 +335,20 @@ modularité et l’indépendance de la couche de persistance.
 
 ![Diagramme de classe des `DAO`](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/IUTInfoAix-M3106/TpJpa/master/src/main/resources/assets/DAO.puml)
 
-#### Question  :
+#### Question 11 :
 
 Implémenter la classe `DAOEtudiantJPA` devant rendre les mêmes services que celle développé dans le TP précédent.
 
-#### Question  :
+#### Question 12 :
 
 Implémenter toutes les classes `DAO`.
 
-#### Question  :
+#### Question 13 :
 
 Copier la classe `TestJPA` dans la nouvelle classe `AfficheNotation`. Modifier le code de celle-ci pour que sa boucle 
 principale récupère tous les étudiants de deuxième année, les affiche, puis affiche tous ceux qui ont été notés en « ACSI ».
 
-#### Question  :
+#### Question 14 (bonus) :
 
 L’écriture des opérations CRUD des DAO étant toujours identique, écrire la classe abstraite `DAOGeneriqueJPA<T, ID extends Serializable>` qui implémente `DAO<T>`. Modifier les DAO précédemment écrits pour qu’ils dérivent de cette classe. Vérifier que vos programmes fonctionnent toujours
 
