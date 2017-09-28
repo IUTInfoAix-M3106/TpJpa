@@ -139,12 +139,12 @@ code, il faut rajouter l’annotation `@Transient` devant la déclaration de la 
 
 #### Question 2 :
 
-Copier la classe `TestJPA` dans la nouvelle classe `AfficheEntite`. Modifier le code de cette classe pour qu’elle récupère 
+Copier la classe `ExempleJPA` dans la nouvelle classe `AfficheEntite`. Modifier le code de cette classe pour qu’elle récupère 
 l’étudiant dont le `NUM_ET` est 1106 et l’affiche sur la sortie standard.
 
 #### Question 3 :
 
-Copier la classe `TestJPA` dans la nouvelle classe `AjouteEntite`. Modifier le code de cette classe pour qu’elle crée 
+Copier la classe `ExempleJPA` dans la nouvelle classe `AjouteEntite`. Modifier le code de cette classe pour qu’elle crée 
 un nouveau module, l’affiche, attend 1 minute et le supprime de la base de données. Vérifier en parallèle dans la 
 console SQL que l’ajout et la suppression ont bien lieu.
 
@@ -171,7 +171,8 @@ peut être associée à plusieurs sources.
 
 Du point de vue de la source, les deux premières peuvent être implémentées par une simple donnée membre pointant vers 
 l’entité associée. Elles sont donc appelées associations monovaluées (ou Single-valued associations). Les deux dernières 
-doivent utiliser une collection pour matérialiser tous les liens, on les nomme associations multivaluées (ou Collection-valued associations).
+doivent utiliser une collection pour matérialiser tous les liens, on les nomme associations multivaluées (ou 
+Collection-valued associations).
 
 ### Single-valued associations
 
@@ -193,13 +194,13 @@ l’instant on considère cette dernière comme unidirectionnelle) soient correc
 de données (N’oubliez pas que la BD ne respecte pas la convention JPA et qu’il faut donc configurer le mapping).
 
 #### Question 5 :
-Copier la classe `TestJPA` dans la nouvelle classe `AfficheResponsable`. Modifier le code de cette classe pour qu’elle 
+Copier la classe `ExempleJPA` dans la nouvelle classe `AfficheResponsable`. Modifier le code de cette classe pour qu’elle 
 récupère la matière BD et affiche l’enseignant qui en est responsable sur la sortie standard. Soyez vigilent que vos 
 méthodes `toString()` n’essaient pas d’afficher tout le graphe des objets.
 
 #### Question 6 :
 
-Copier la classe `TestJPA` dans la nouvelle classe `AfficheHierarchieModules`. Modifier le code de cette classe pour 
+Copier la classe `ExempleJPA` dans la nouvelle classe `AfficheHierarchieModules`. Modifier le code de cette classe pour 
 qu’elle récupère la matière BD et affiche récursivement la hiérarchie des modules de cette matière. Observer la console 
 pour bien comprendre comment EclipseLink charge chacun des modules de cette hiérarchie.
 
@@ -221,6 +222,7 @@ dans la classe `Departement` une donnée membre et les accesseurs suivants :
 
 ``` java
 private Collection<Employe> employes;
+
 public Collection<Employe> getEmployes() {
     return employes;
 }
@@ -228,7 +230,7 @@ public boolean add(Employe e) {
     return employes.add(e);
 }
 public boolean remove(Object o) {
-        return employes.remove(o);
+    return employes.remove(o);
 }
 ```
 
@@ -257,7 +259,7 @@ Modifier et annoter l’entité `Module` pour que l’association *“Est spéci
 
 #### Question 8 :
 
-Copier la classe `TestJPA` dans la nouvelle classe `afficheSpécialistes`. Modifier le code de cette classe pour qu’elle 
+Copier la classe `ExempleJPA` dans la nouvelle classe `afficheSpécialistes`. Modifier le code de cette classe pour qu’elle 
 récupère la matière BD et affiche tous les spécialistes de cette matière.
 
 Le dernier type d’association qu’il nous reste à étudier sont les associations many-to-many. Pour ces associations en 
@@ -285,7 +287,7 @@ les attributs portés.
 
 #### Question 10 :
 
-Copier la classe `TestJPA` dans la nouvelle classe `afficheNotation`. Modifier le code de cette classe pour qu’elle récupère 
+Copier la classe `ExempleJPA` dans la nouvelle classe `afficheNotation`. Modifier le code de cette classe pour qu’elle récupère 
 la matière BD et affiche tous les étudiants ayant été notés pour cette matière.
 
 La gestion des attributs portés et les associations ternaires avec JPA reposent principalement sur le principe de 
@@ -345,7 +347,7 @@ Implémenter toutes les classes `DAO`.
 
 #### Question 13 :
 
-Copier la classe `TestJPA` dans la nouvelle classe `AfficheNotation`. Modifier le code de celle-ci pour que sa boucle 
+Copier la classe `ExempleJPA` dans la nouvelle classe `AfficheNotation`. Modifier le code de celle-ci pour que sa boucle 
 principale récupère tous les étudiants de deuxième année, les affiche, puis affiche tous ceux qui ont été notés en « ACSI ».
 
 #### Question 14 (bonus) :
