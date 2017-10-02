@@ -195,7 +195,7 @@ de données (N’oubliez pas que la BD ne respecte pas la convention JPA et qu�
 
 #### Question 5 :
 Copier la classe `ExempleJPA` dans la nouvelle classe `AfficheResponsable`. Modifier le code de cette classe pour qu’elle 
-récupère la matière BD et affiche l’enseignant qui en est responsable sur la sortie standard. Soyez vigilent que vos 
+récupère la matière BD et affiche l’enseignant qui en est responsable sur la sortie standard. Soyez vigilant que vos 
 méthodes `toString()` n’essaient pas d’afficher tout le graphe des objets.
 
 #### Question 6 :
