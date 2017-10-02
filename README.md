@@ -7,14 +7,14 @@
 * **Enseignants:** [Sébastien NEDJAR](mailto:sebastien.nedjar@univ-amu.fr)
 * **Besoin d'aide ?**
     * La page [Piazza de ce cours](https://piazza.com/univ-amu.fr/fall2017/m3106/home).
-    * Consulter et/ou créér des [issues](https://github.com/IUTInfoAix-M3106/TutoJdbc/issues).
+    * Consulter et/ou créer des [issues](https://github.com/IUTInfoAix-M3106/TutoJdbc/issues).
     * [Email](mailto:sebastien.nedjar@univ-amu.fr) pour une question d'ordre privée, ou pour convenir d'un rendez-vous physique.
 
 TP découverte de JPA et Création du couche de persistance [![Build Status](https://travis-ci.org/IUTInfoAix-M3106/TpJpa.svg)](https://travis-ci.org/IUTInfoAix-M3106/TpJpa)
 ==========================================================
 
-Tp d'initiation à JPA donné aux étudiants de deuxième année du DUT Informatique d'Aix-Marseille. Plusieurs liens dans le document pointent vers des ressources non accéssibles en dehors de l'IUT. 
-Les versions ultérieures corrigerons ce problème. Ce document est diffusé sous license Creative Common 
+Tp d'initiation à JPA donné aux étudiants de deuxième année du DUT Informatique d'Aix-Marseille. Plusieurs liens dans le document pointent vers des ressources non accessibles en dehors de l'IUT. 
+Les versions ultérieures corrigerons ce problème. Ce document est diffusé sous licence Creative Common 
 CC-BY-NC-SA.
 
 Dans le premier TP nous avons construit une couche DAO pour simplifier et uniformiser l’accès aux données. L’énorme 
@@ -117,7 +117,7 @@ String est converti en `VARCHAR(255)`.
 clef primaire.
 
 -   `@javax.persistence.Column` permet de préciser des informations sur une colonne de la table : changer son nom (qui 
-par défaut porte le même nom que l’attribut), préciser son type, sa taille et si la colonne autorise ou non la valeur null.
+par défaut porte le même nom que l’attribut), préciser son type, sa taille et si la colonne autorise ou non la valeur nulle.
 
 -   `@javax.persistence.Embedded` précise que la donnée membre devra être intégrée dans l’entité.
 
@@ -172,7 +172,7 @@ peut être associée à plusieurs sources.
 Du point de vue de la source, les deux premières peuvent être implémentées par une simple donnée membre pointant vers 
 l’entité associée. Elles sont donc appelées associations monovaluées (ou Single-valued associations). Les deux dernières 
 doivent utiliser une collection pour matérialiser tous les liens, on les nomme associations multivaluées (ou 
-Collection-valued associations).
+*Collection-valued* associations).
 
 ### Single-valued associations
 
@@ -262,14 +262,14 @@ Modifier et annoter l’entité `Module` pour que l’association *“Est spéci
 Copier la classe `ExempleJPA` dans la nouvelle classe `AfficheSpécialistes`. Modifier le code de cette classe pour qu’elle 
 récupère la matière BD et affiche tous les spécialistes de cette matière.
 
-Le dernier type d’association qu’il nous reste à étudier sont les associations many-to-many. Pour ces associations en 
+Le dernier type d’association qu’il nous reste à étudier sont les associations *many-to-many*. Pour ces associations en 
 relationnel on utilise des relations dites de jointure. De manière générale, elles sont naturellement bidirectionnelle 
 à cause de cette implémentation relationnelle (même si l’on peut restreindre la navigabilité). Comme pour les 
-associations `one-to-many` bidirectionnelles, l’un des cotés doit porter l’attribut `mappedBy` dans l’annotation 
+associations *one-to-many* bidirectionnelles, l’un des cotés doit porter l’attribut `mappedBy` dans l’annotation 
 `@ManyToMany`. Le coté qui porte cet élément est dit coté inverse alors que le coté qui en est dépourvu sera le 
 propriétaire. Chaque coté de l’association doit être doté d’une collection la matérialisant.
 
-Le paramétrage de la table de jointure utilisée se fait grâce à l’annotation @JoinTable du coté de l’entité propriétaire. 
+Le paramétrage de la table de jointure utilisée se fait grâce à l’annotation `@JoinTable` du coté de l’entité propriétaire. 
 Cette annotation possède trois attributs importants :
 
 -   `name` qui indique le nom de la table de jointure.
@@ -306,24 +306,24 @@ Chacune d’elles devra contenir des méthodes pour effectuer les 4 opérations 
  *créer, récupérer, mettre à jour et supprimer*. Par convention, chacune des classes de DAO devra être nommée par 
  “`DAO`” suivi due nom de la classe métier associée.
 
--   `insert` qui a pour objectif de créer un nouvel étudiant dans la base de données. L’identifiant d’un tuple ne pouvant 
+- `insert` qui a pour objectif de créer un nouvel étudiant dans la base de données. L’identifiant d’un tuple ne pouvant 
 être connu avant son insertion, cette méthode retourne une copie de l’objet métier passé en paramètre avec un identifiant 
 définitif. L’identité d’un objet dépendant uniquement de l’identifiant, un objet métier créé localement avec le 
 constructeur par défaut (objet temporaire sans identité propre du point de vue de `equals()` et `hashCode()`) ne devra 
 participer à aucune association avant d’être inséré dans la base avec cette méthode.
 
--   `update` qui prend un objet métier en paramètre et essaie faire la mise à jour dans la base de données. La valeur 
+- `update` qui prend un objet métier en paramètre et essaie faire la mise à jour dans la base de données. La valeur 
 retournée par cette méthode indique si la mise à jour a pu avoir lieu.
 
--   `delete` qui prend un étudiant en paramètre et essaie de le supprimer de la base de données. La valeur retournée par 
+- `delete` qui prend un étudiant en paramètre et essaie de le supprimer de la base de données. La valeur retournée par 
 cette méthode indique si la suppression a pu avoir lieu.
 
--   les `get` qui constituent, avec les `find`, les méthodes de récupération des données. Les paramètres passés à ces 
+- les `get` qui constituent, avec les `find`, les méthodes de récupération des données. Les paramètres passés à ces 
 méthodes permettent de récupérer uniquement les tuples satisfaisants certains critères. La différence entre ces deux 
 familles de méthodes est que les `get` doivent retourner exactement un seul résultat alors que les `find` peuvent en 
 retourner plusieurs.
 
--   les `compute` qui, comme leur nom l’indique, ont pour objectif d’effectuer des calculs sur les étudiants. La plupart 
+- les `compute` qui, comme leur nom l’indique, ont pour objectif d’effectuer des calculs sur les étudiants. La plupart 
 du temps (sauf si le calcul demande de ne rapatrier aucune donnée) on préférera, pour des raisons d’efficacité, le faire 
 directement dans le `Sgbd`. Ces méthodes sont donc soit des requêtes <span style="font-variant:small-caps;">Sql</span> 
 agrégatives soit des appels de procédures stockées.
