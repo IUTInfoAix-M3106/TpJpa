@@ -154,7 +154,7 @@ Mapping des associations
 Dans le cours et dans le TP précédent, nous avons vu comment les associations étaient implémentées en Java. En UML 
 les associations ont une propriété supplémentaire, la navigabilité. En effet, contrairement au relationnel, une 
 association peut n’être accessible qu’à l’une de ses extrémités. De manière générale, une association bidirectionnelle 
-peut être vue comme une paire d’associations unidirectionnelles de sens opposé. Chacune d’elle pouvvent, comme dans le 
+peut être vue comme une paire d’associations unidirectionnelles de sens opposé. Chacune d’elle peut, comme dans le 
 contexte BD, être classées par rapport aux cardinalités en UML de chaque rôle :
 
 -   Many-to-one pour les associations hiérarchiques (au sens du MCD) qui à une entité départ associe au plus une seule 
