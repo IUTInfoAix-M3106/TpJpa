@@ -86,7 +86,7 @@ Le fichier `src/main/resources/META-INF/persistence.xml` devra ressembler à cec
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.user"  value="monUser"/>
             <property name="javax.persistence.jdbc.password"  value="monPassword"/>
-            <property name="eclipselink.logging.level" value="ALL"/>
+            <property name="eclipselink.logging.level" value="FINE"/>
             <!--  <property name="eclipselink.ddl-generation"  value="create-tables"/> -->
         </properties>
     </persistence-unit>
@@ -259,7 +259,7 @@ Modifier et annoter l’entité `Module` pour que l’association *“Est spéci
 
 #### Question 8 :
 
-Copier la classe `ExempleJPA` dans la nouvelle classe `afficheSpécialistes`. Modifier le code de cette classe pour qu’elle 
+Copier la classe `ExempleJPA` dans la nouvelle classe `AfficheSpécialistes`. Modifier le code de cette classe pour qu’elle 
 récupère la matière BD et affiche tous les spécialistes de cette matière.
 
 Le dernier type d’association qu’il nous reste à étudier sont les associations many-to-many. Pour ces associations en 
@@ -287,7 +287,7 @@ les attributs portés.
 
 #### Question 10 :
 
-Copier la classe `ExempleJPA` dans la nouvelle classe `afficheNotation`. Modifier le code de cette classe pour qu’elle récupère 
+Copier la classe `ExempleJPA` dans la nouvelle classe `AfficheNotation`. Modifier le code de cette classe pour qu’elle récupère 
 la matière BD et affiche tous les étudiants ayant été notés pour cette matière.
 
 La gestion des attributs portés et les associations ternaires avec JPA reposent principalement sur le principe de 
